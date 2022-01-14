@@ -1,0 +1,20 @@
+
+
+@font-face {
+    font-family: 'neue_helvetica';
+    src: url('helvetica_neue_lt_55_roman-webfont.woff2') format('woff2'),
+         url('helvetica_neue_lt_55_roman-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+@font-face {
+    font-family: 'neue_helvetica';
+    src: url('helvetica_neue_lt_75_bold-webfont.woff2') format('woff2'),
+         url('helvetica_neue_lt_75_bold-webfont.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+
+}

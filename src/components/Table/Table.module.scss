@@ -1,0 +1,28 @@
+$border_color: #b0b0b0;
+$header_color: #5C5C5C;
+$odd_row_color: #d9d9d9;
+.table {
+  border: 1px solid $border_color;
+  text-align: center;
+
+  &_row, &_header {
+    display: grid;
+    grid-template-columns: repeat(5, calc(100% / 5));
+
+    div {
+      padding: 14px 20px;
+    }
+
+    &:not(:last-child) > div {
+      border-bottom: 1px solid $border_color;
+    }
+  }
+
+  &_header {
+    color: $header_color;
+  }
+
+  &_body > div:nth-child(odd) {
+    background-color: $odd_row_color;
+  }
+}
