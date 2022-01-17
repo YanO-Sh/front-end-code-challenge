@@ -7,12 +7,15 @@ const Table = ({people}) => {
     const tableHeaders = ['First Name', 'Last Name', 'Gender', 'Email', 'IP Address'];
 
     return (
-        <div className={styles.table}>
-            <div className={styles.table_header}>
-                { tableHeaders.map((header, index) => <div key={index}>{ header }</div>) }
-            </div>
-            <div className={styles.table_body}>
-                { people.map(person => <TableRow className={styles.table_row} key={person.id} data={person} />) }
+        <div className={styles.table_wrap}>
+            <h3>Database Entries</h3>
+            <div className={styles.table}>
+                <div className={styles.table_header}>
+                    { tableHeaders.map((header, index) => <div key={index}>{ header }</div>) }
+                </div>
+                <div className={styles.table_body}>
+                    { people.map(person => <TableRow className={styles.table_row} key={person.id} data={person} />) }
+                </div>
             </div>
         </div>
     );

@@ -1,27 +1,10 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React from 'react';
 import Head from 'next/head';
 import styles from './Index.module.scss';
 import Table from '../components/Table';
-// import Status from '../components/Status';
-import SocketIOClient from "socket.io-client";
+import Status from '../components/Status';
 
 export const IndexPage = ({people}) => {
-    const [data, setData] = useState('');
-
-    useEffect(() => {
-        // connect to socket server
-        const socket = SocketIOClient.connect(process.env.WS_URL, {
-            path: "/api/socketio",
-        });
-
-        // log socket connection
-        socket.on("connect", () => {
-            console.log("SOCKET CONNECTED!", socket.id);
-        });
-
-        // socket disconnet onUnmount if exists
-        if (socket) return () => socket.disconnect();
-    }, []);
 
     return (
         <>
@@ -35,15 +18,7 @@ export const IndexPage = ({people}) => {
             <div className={styles.container}>
                 <h1>Rehash Code Challenge</h1>
                 <h2 style={{textAlign: 'right'}}>YanO-Sh</h2>
-                {data}
-                {/*<WebSocket*/}
-                {/*    url={ process.env.WS_URL }*/}
-                {/*    onMessage={handleData}*/}
-                {/*    // onOpen={open => console.log(open)}*/}
-                {/*    // onClose={close => console.log(close)}*/}
-                {/*    // debug={true}*/}
-                {/*    // reconnect={true}*/}
-                {/*/>*/}
+                <Status />
                 <Table people={people} />
             </div>
         </>

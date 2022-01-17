@@ -1,27 +1,32 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styles from './Status.module.scss';
-import { WebSocket } from 'nextjs-websocket'
 
 const Status = () => {
+    const [data, setData] = useState(null);
+    const ws = useRef(null);
+    const randomColor = Math.floor(Math.random()*16777215).toString(16);
 
-    const [data, setData] = useState('');
+    useEffect(() => {
+        ws.current = new WebSocket(process.env.WS_URL);
+        ws.current.onopen = (event) => {
+            ws.current.send(JSON.stringify());
+        };
+        ws.current.onmessage = function (event) {
+            const json = JSON.parse(event.data);
+            setData(json)
+        };
+        //clean up function
+        return () => ws.current.close();
+    }, []);
 
-    function handleData(data) {
-        let result = JSON.parse(data)
-        setData(result)
-    }
+    if(!data) return null;
 
     return (
-        <div className={styles.status}>
-            {data}
-            <WebSocket
-                url={ process.env.WS_URL }
-                onMessage={data => handleData(data)}
-                onOpen={console.log('open')}
-                onClose={console.log('close')}
-                debug={true}
-                reconnect={true}
-            />
+        <div className={styles.status_wrap}>
+            <h3>Server Status</h3>
+            <div className={styles.status} style={{color: `#${randomColor}`}}>
+                {data}
+            </div>
         </div>
     );
 };
